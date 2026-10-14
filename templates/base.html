@@ -1,1 +1,29 @@
-<!-- StudySpace templates -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <title>{% block title %}StudySpace — Ruang Produktif Mahasiswa{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">S</span>
+      <span class="brand-copy"><strong>StudySpace</strong><small>Ruang produktifmu</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a href="/" class="{% if request.path == '/' %}active{% endif %}"><span>⌂</span> Beranda</a>
+      <a href="/keuangan" class="{% if request.path.startswith('/keuangan') %}active{% endif %}"><span>↗</span> Keuangan</a>
+      <a href="/jadwal" class="{% if request.path.startswith('/jadwal') %}active{% endif %}"><span>▦</span> Jadwal</a>
+      <a href="/rangkuman" class="{% if request.path.startswith('/rangkuman') %}active{% endif %}"><span>▤</span> Rangkuman</a>
+      <a href="/latihan" class="{% if request.path.startswith('/latihan') %}active{% endif %}"><span>✓</span> Latihan</a>
+    </nav>
+  </header>
+  <main class="page-shell">
+    {% block isi %}{% endblock %}
+    <footer class="site-footer"><strong>StudySpace</strong><span>Belajar teratur, berkembang setiap hari.</span></footer>
+  </main>
+</body>
+</html>
