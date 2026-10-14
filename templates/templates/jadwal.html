@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block isi %}
+    <h1>Jadwal</h1>
+
+    <h2>Tambah kegiatan</h2>
+    <form method="POST">
+
+        <label for="nama">Nama kegiatan</label>
+        <input type="text" id="nama" name="nama" placeholder="Contoh: Kuliah Algoritma, Kerja kelompok" required>
+
+        <label for="jenis">Jenis</label>
+        <select id="jenis" name="jenis" required>
+            <option value="Kuliah">Kuliah</option>
+            <option value="Tugas">Tugas</option>
+            <option value="Organisasi">Organisasi</option>
+            <option value="Kerja">Kerja</option>
+            <option value="Pribadi">Pribadi</option>
+        </select>
+
+        <label for="tanggal">Tanggal</label>
+        <input type="date" id="tanggal" name="tanggal" required>
+
+        <label for="mulai">Jam mulai</label>
+        <input type="time" id="mulai" name="mulai" required>
+
+        <label for="selesai">Jam selesai</label>
+        <input type="time" id="selesai" name="selesai" required>
+
+        <label for="catatan">Catatan (opsional)</label>
+        <input type="text" id="catatan" name="catatan" placeholder="Contoh: bawa laptop, ruang B2">
+
+        <button type="submit">Simpan</button>
+    </form>  
+      <h2>Daftar kegiatan</h2>
+    <table>
+        <tr>
+            <th>Tanggal</th>
+            <th>Jam</th>
+            <th>Kegiatan</th>
+            <th>Jenis</th>
+            <th>Catatan</th>
+            <th>Aksi</th>
+        </tr>
+        {% for k in daftar %}
+        <tr>
+            <td>{{ k[2] }}</td>
+            <td>{{ k[3] }} - {{ k[4] }}</td>
+            <td>{{ k[0] }}</td>
+            <td>{{ k[1] }}</td>
+            <td>{{ k[5] }}</td>
+            <td>
+                <form method="POST" action="/hapus-jadwal/{{ k[6] }}" style="padding:0; border:none; background:none;" onsubmit="return confirm('Hapus kegiatan ini?')">
+                    <button type="submit">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
