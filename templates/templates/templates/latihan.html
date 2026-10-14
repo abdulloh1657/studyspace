@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Latihan — StudySpace{% endblock %}
+{% block isi %}
+    <div class="page-heading"><span class="eyebrow">UJI PEMAHAMAN</span><h1>Latihan mandiri</h1><p class="muted">Pilih rangkuman untuk mengecek pemahamanmu.</p></div>
+    <p>Pilih rangkuman yang mau dijadikan soal isian.</p>
+
+    <div class="table-wrap"><table>
+        <tr>
+            <th>Mata kuliah</th>
+            <th>Judul</th>
+            <th>Aksi</th>
+        </tr>
+        {% for r in daftar %}
+        <tr>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[0] }}</td>
+            <td><a href="/latihan/{{ r[2] }}">Mulai latihan</a></td>
+        </tr>
+        {% endfor %}
+    </table></div>
+
+    {% if not daftar %}
+    <p>Belum ada rangkuman. Tulis dulu di menu Rangkuman.</p>
+    {% endif %}
+{% endblock %}
