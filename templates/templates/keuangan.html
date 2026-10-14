@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Keuangan — StudySpace{% endblock %}
+{% block isi %}
+    <div class="page-heading"><span class="eyebrow">KELOLA UANG</span><h1>Keuangan</h1><p class="muted">Pantau arus uangmu dan catat transaksi dengan rapi.</p></div>
+        <form method="GET" action="/keuangan" class="filter-form">
+        <label for="bulan">Tampilkan bulan</label>
+        <input type="month" id="bulan" name="bulan" value="{{ bulan }}">
+        <button type="submit">Tampilkan</button>
+    </form>
+    <div class="ringkasan">
+        <p>Pemasukan: Rp {{ "{:,}".format(total_masuk).replace(",", ".") }}</p>
+        <p>Pengeluaran: Rp {{ "{:,}".format(total_keluar).replace(",", ".") }}</p>
+        <p>Sisa uang: Rp {{ "{:,}".format(saldo).replace(",", ".") }}</p>
+    </div>
+    <h2>Catat transaksi</h2>
+    <form method="POST" class="content-form">
+
+        <label for="jenis">Jenis</label>
+        <select id="jenis" name="jenis" required>
+            <option value="pemasukan">Pemasukan</option>
+            <option value="pengeluaran">Pengeluaran</option>
+        </select>
+
+        <label for="kategori">Kategori</label>
+        <select id="kategori" name="kategori" required></select>
+        <label for="jumlah">Jumlah (Rp)</label>
+        <input type="number" id="jumlah" name="jumlah" min="0" required>
+
+        <label for="tanggal">Tanggal</label>
+        <input type="date" id="tanggal" name="tanggal" required>
+
+        <button type="submit">Simpan</button>
+    </form>
+        <h2>Riwayat transaksi</h2>
+    <div class="table-wrap"><table>
+        <tr>
+            <th>Tanggal</th>
+            <th>Jenis</th>
+            <th>Kategori</th>
+            <th>Jumlah (Rp)</th>
+            <th>Aksi</th>
+        </tr>
+        {% for t in daftar %}
+        <tr>
+            <td>{{ t[3] }}</td>
+            <td>{{ t[0] }}</td>
+            <td>{{ t[1] }}</td>
+            <td>{{ t[2] }}</td>
+            <td>
+    <form method="POST" action="/hapus/{{ t[4] }}" style="padding:0; border:none; background:none;" onsubmit="return confirm('Hapus transaksi ini?')">
+        <button type="submit" style="margin-top:0; padding:6px 12px; background-color:#e53e3e;">Hapus</button>
+    </form>
+</td>
+        </tr>
+        {% endfor %}
+    </table></div>
+        <script>
+        const kategoriPer = {
+            pengeluaran: ["Makan", "Transport", "Kuliah", "Hiburan", "Lainnya"],
+            pemasukan: ["Uang saku", "Beasiswa", "Kerja sampingan", "Lainnya"]
+        };
+
+        const jenis = document.getElementById("jenis");
+        const kategori = document.getElementById("kategori");
+
+        function isiKategori() {
+            kategori.innerHTML = "";
+            kategoriPer[jenis.value].forEach(function (nama) {
+                const opsi = document.createElement("option");
+                opsi.value = nama;
+                opsi.textContent = nama;
+                kategori.appendChild(opsi);
+            });
+        }
+
+        jenis.addEventListener("change", isiKategori);
+        isiKategori();
+    </script>
+{% endblock %}
