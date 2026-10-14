@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Kerjakan latihan — StudySpace{% endblock %}
+{% block isi %}
+    <div class="page-heading"><span class="eyebrow">UJI PEMAHAMAN</span><h1>Latihan: {{ r[0] }}</h1><p class="muted">{{ r[1] }}</p></div>
+
+    {% if hasil %}
+        <h2>Skor: {{ benar }} dari {{ total }}</h2>
+
+        {% for h in hasil %}
+        <```html
+<div class="hasil-jawaban {% if h.cocok %}jawaban-benar{% else %}jawaban-salah{% endif %}" style="background:white; border:1px solid #cbd5e0; border-radius:8px; padding:14px; margin-bottom:12px;">
+
+            <p>{{ loop.index }}. {{ h.kalimat }}</p>
+            <p>Jawaban lo: {{ h.jawab or '(kosong)' }}</p>
+            {% if not h.cocok %}
+            <p>Jawaban yang benar: <strong>{{ h.kunci }}</strong></p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <p><a href="/latihan/{{ id }}">Ulangi dengan soal baru</a> &middot; <a href="/latihan">Pilih rangkuman lain</a></p>
+
+    {% elif soal %}
+        <p>Isi bagian yang kosong (huruf besar atau kecil tidak masalah).</p>
+        <form method="POST" class="content-form quiz-form">
+            <input type="hidden" name="jumlah" value="{{ soal|length }}">
+            {% for s in soal %}
+            <input type="hidden" name="kalimat{{ loop.index0 }}" value="{{ s.kalimat }}">
+            <input type="hidden" name="kunci{{ loop.index0 }}" value="{{ s.kunci }}">
+            <label for="jawab{{ loop.index0 }}">{{ loop.index }}. {{ s.kalimat }}</label>
+            <input type="text" id="jawab{{ loop.index0 }}" name="jawab{{ loop.index0 }}" autocomplete="off">
+            {% endfor %}
+            <button type="submit">Periksa jawaban</button>
+        </form>
+
+    {% else %}
+        <p>Rangkuman ini belum cukup panjang untuk dijadikan soal. Tulis beberapa kalimat lengkap (minimal sekitar 6 kata per kalimat), lalu coba lagi.</p>
+        <p><a href="/latihan">Kembali</a></p>
+    {% endif %}
+{% endblock %}
