@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ r[0] }} — StudySpace{% endblock %}
+{% block isi %}
+    <div class="page-heading"><span class="eyebrow">CATATAN TERSIMPAN</span><h1>{{ r[0] }}</h1><p class="muted">{{ r[1] }} · {{ r[2] }}</p></div>
+    
+
+    <article class="reading-card">{{ r[3] }}</article>
+    
+    <form method="POST" action="/hapus-rangkuman/{{ id }}" class="inline-form" onsubmit="return confirm('Hapus rangkuman ini?')">
+        <button type="submit" class="button-danger">Hapus rangkuman</button>
+    </form>
+
+    <p><a href="/rangkuman">Kembali ke daftar</a></p>
+{% endblock %}
