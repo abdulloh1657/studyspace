@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Beranda — StudySpace{% endblock %}
+{% block isi %}
+<section class="welcome-panel">
+  <div class="welcome-copy">
+    <span class="eyebrow">RUANG KERJA MAHASISWA</span>
+    <h1>Atur semuanya.<br><span>Fokus pada progresmu.</span></h1>
+    <p>Satu tempat untuk mengelola uang, merapikan jadwal, menyimpan materi, dan menguji pemahaman.</p>
+    <a class="button-link" href="/jadwal">Atur jadwal <span>→</span></a>
+  </div>
+  <div class="welcome-art" aria-hidden="true">
+    <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+    <div class="art-card"><div class="dots"><i></i><i></i><i></i></div><div class="art-check">✓</div><div class="art-line"></div><div class="art-line short"></div><div class="progress"><span></span></div><small>Langkah kecil, progres nyata</small></div>
+    <span class="sparkle">✦</span>
+  </div>
+</section>
+<div class="section-heading"><div><span class="eyebrow">MULAI DARI SINI</span><h2>Ruang kerjamu</h2><p class="muted">Pilih fitur yang ingin kamu gunakan hari ini.</p></div></div>
+<section class="feature-grid">
+  <a class="feature-card blue" href="/keuangan"><span class="feature-icon">↗</span><span class="feature-label">KELOLA UANG</span><h3>Keuangan</h3><p>Catat pemasukan dan pengeluaran supaya arus uangmu lebih jelas.</p><span class="feature-arrow">Buka keuangan <b>→</b></span></a>
+  <a class="feature-card violet" href="/jadwal"><span class="feature-icon">▦</span><span class="feature-label">JAGA RITME</span><h3>Jadwal</h3><p>Susun kuliah, tugas, organisasi, dan kegiatan pribadi.</p><span class="feature-arrow">Atur jadwal <b>→</b></span></a>
+  <a class="feature-card green" href="/rangkuman"><span class="feature-icon">▤</span><span class="feature-label">SIMPAN MATERI</span><h3>Rangkuman</h3><p>Simpan catatan kuliah dan unggah materi agar mudah dibaca lagi.</p><span class="feature-arrow">Lihat rangkuman <b>→</b></span></a>
+  <a class="feature-card orange" href="/latihan"><span class="feature-icon">✓</span><span class="feature-label">UJI PEMAHAMAN</span><h3>Latihan</h3><p>Ubah rangkuman menjadi soal isian untuk latihan mandiri.</p><span class="feature-arrow">Mulai latihan <b>→</b></span></a>
+</section>
+{% endblock %}
