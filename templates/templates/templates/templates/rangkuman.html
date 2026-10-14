@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Rangkuman — StudySpace{% endblock %}
+{% block isi %}
+    <div class="page-heading"><span class="eyebrow">SIMPAN MATERI</span><h1>Rangkuman</h1><p class="muted">Kumpulkan inti materi kuliah dalam satu ruang.</p></div>
+
+    <h2>Tulis rangkuman</h2>
+    <form method="POST" enctype="multipart/form-data" class="content-form">
+
+        <label for="judul">Judul</label>
+        <input type="text" id="judul" name="judul" placeholder="Contoh: Bab 3 Struktur Data" required>
+
+        <label for="matkul">Mata kuliah</label>
+        <input type="text" id="matkul" name="matkul" placeholder="Contoh: Algoritma dan Pemrograman" required>
+
+        <label for="isi">Isi rangkuman</label>
+        <textarea id="isi" name="isi" rows="10" placeholder="Tulis ringkasan materi di sini, atau unggah file di bawah"></textarea>
+
+        <label for="file">Atau unggah file materi (.txt, .pdf, .docx)</label>
+        <input type="file" id="file" name="file" accept=".txt,.md,.pdf,.docx">
+
+        <button type="submit">Simpan</button>
+    </form>
+    
+    <h2>Daftar rangkuman</h2>
+    <div class="table-wrap"><table>
+        <tr>
+            <th>Tanggal</th>
+            <th>Mata kuliah</th>
+            <th>Judul</th>
+        </tr>
+        {% for r in daftar %}
+        <tr>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[1] }}</td>
+            <td><a href="/rangkuman/{{ r[3] }}">{{ r[0] }}</a></td>
+        </tr>
+        {% endfor %}
+    </table></div>    
+{% endblock %}
